@@ -1,0 +1,46 @@
+<?php
+
+use app\modules\admin\models\Images;
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\modules\admin\models\ImagesSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Images';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="images-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?= Html::a('Create Images', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'title',
+            [
+                'format' => 'html',
+                'label' => 'Изображение',
+                'value' => function($data){
+                    return Html::img($data->getImage(), ['width'=>200]);
+                }
+            ],
+            [
+                'attribute' => 'idimage',
+                'value' => 'catImg.name',
+            ],
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+</div>
